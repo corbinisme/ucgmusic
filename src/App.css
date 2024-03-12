@@ -1,3 +1,10 @@
+@import url("https://cas-production.ucg.org/themes/custom/bot_custom5/css/style.css?s9h81d");
 .App {
   padding: 2em;
+}
+.active {
+  font-weight: bold;
+}
+.title {
+  cursor: pointer;
 }
