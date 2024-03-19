@@ -1,25 +1,42 @@
-
+import { useEffect, useState } from 'react';
 import YouTube from 'react-youtube';
 
 const onReady = (event) => {
     console.log("ready", event)
     // access to player in all event handlers via event.target
+    window['cElement'] = event;
     event.target.pauseVideo();
 }
 
 
 function YTplayer(props) {
-    const YTid = props.YTid;
-    const onEnded=props.onEnded;
-    const opts = {
-        height: '390',
-        width: '640',
-        enablejsapi: true,
-        playerVars: {
-          // https://developers.google.com/youtube/player_parameters
-          autoplay: 1,
-        },
-    };
+
+
+  useEffect(() => {
+    if (window['cElement'] && window['cElement'].target &&  window['cElement'].target.h!=null) {
+      console.log(window['cElement'].target)
+      props.isPaused
+        ? window['cElement'].target.pauseVideo()
+        : window['cElement'].target.playVideo();
+    } else {
+      console.log("no cElement")
+    }
+  }, [props.isPaused, window['cElement']]);
+
+  const YTid = props.YTid;
+  const onEnded=props.onEnded;
+  const opts = {
+      height: '390',
+      width: '640',
+      enablejsapi: true,
+
+      playerVars: {
+        // https://developers.google.com/youtube/player_parameters
+        autoplay: 1,
+        controls: 0,
+        rel: 0,
+      },
+  };
   
     /*
     <YouTube

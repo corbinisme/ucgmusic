@@ -1,4 +1,3 @@
-@import url("https://cas-production.ucg.org/themes/custom/bot_custom5/css/style.css?s9h81d");
 .App {
   padding: 2em;
 }
@@ -7,4 +6,8 @@
 }
 .title {
   cursor: pointer;
+}
+.mediaWrapper {
+  background: #eee;
+  padding: 1em;
 }
