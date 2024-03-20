@@ -1,5 +1,37 @@
-.App {
-  padding: 2em;
+.ucg_music {
+  padding-top: 1em;
+}
+.player_modal {
+  display: none;
+
+}
+.ucg_music .page_playlist ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ucg_music .page_playlist ul li {
+  margin: 0;
+  margin-bottom: 2em;
+  padding: 0;
+  list-style: none;
+}
+.ucg_music .page_playlist .title {
+  cursor: pointer;
+  display: block;
+
+}
+
+.player_modal.open {
+  position: fixed;
+  top: 0em;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 100;
+  overflow: auto;
+  display: block;
 }
 .active {
   font-weight: bold;
@@ -8,6 +40,108 @@
   cursor: pointer;
 }
 .mediaWrapper {
-  background: #eee;
+
   padding: 1em;
+  border-radius: 1em;
+  position: relative;
+}
+.progress {
+  height: 15px;
+  background: #eee;
+}
+.progress-bar {
+  height: 15px;
+}
+
+.sr-only {
+  display: block;
+  position: absolute;
+  top:-999em;
+  visibility: hidden;
+}
+.controls_wrapper .btn {
+  border-radius: 50%;
+  height: 64px;
+  width: 64px;
+  padding: 0;
+  text-align: center;
+
+}
+.close_modal {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  text-align: center;
+  line-height: 40px;
+  z-index: 89;
+
+}
+.btn svg {
+  width: 35px;
+  max-height: 35px;
+}
+.btn.small_icon svg {
+  width: 15x;
+  max-height: 15px;
+
+}
+.reverse_icon svg {
+  transform: rotate(180deg);
+}
+.btn.small_icon {
+  padding: 5px;
+  width: 44px;
+  height: 44px;
+}
+
+.media_meta .song_meta {
+
+  max-height: 30px;
+  overflow: auto;
+}
+
+.player_wrapper {
+  height: 350px;
+}
+.album_art img {
+  box-shadow: 0 0 3px #333;
+}
+.inner_wrapper .inner_modal {
+  margin: auto;
+  width: 90%;
+  max-width: 700px;
+  border-radius: 1em;
+  box-shadow: 0 0 3px #333;
+  padding: 1em;
+  background-color: rgba(255,255,255,0.6);
+  backdrop-filter: blur(5px);
+  /*height: calc(100vh - 3em);*/
+  margin-top: 1.5em;
+}
+
+.controls_wrapper {
+  justify-content: center;
+  margin-bottom: 1em;
+  align-items: center;
+}
+
+.ucg_music iframe {
+  width: 100%;
+  height: 300px;
+}
+.bottom_scroll {
+  height: 100px;
+  overflow: auto;
+}
+.bottom_scroll h3 {
+  font-size: 1em;
+  margin: 0;
+  margin-bottom: .5em;
+}
+.bottom_scroll li span {
+  display: none;
 }

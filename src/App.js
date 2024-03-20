@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import YTplayer from "./Components/YTplayer";
 import Player from "./Components/Player";
+import Playlist from "./Components/Playlist";
 import "./App.css";
 
 
 function App() {
 
   const [data, setData] = useState([]);
-  const [currentItem, setCurrentItem] = useState("1de1edf3-7699-4c3e-98ef-e19887e96474");
+  const [currentItem, setCurrentItem] = useState("");
   const s3base = "https://ucgweb.s3.us-east-1.amazonaws.com/music/?cb=" + new Date().getTime();
   //const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRXrGtkWXvMyo-uEdNOSHxndZfsbQ_q3LYnJLSwDSr5g59P4dccfq9O2a9EHdrwOpZpsutdK5LQ15oJ/pub?output=tsv";
   const url = "/jsonapi/node/music";
@@ -26,7 +27,7 @@ function App() {
 
         rows.forEach(element => {
           
-          if(element.attributes.field_is_public_ == false){
+          if(element.attributes.field_is_public_ == false || true){
             let temp = {};
             
             temp["music_link"] = element.attributes.field_music_link;
@@ -41,18 +42,18 @@ function App() {
             
           }
 
-
-
       });
       setData(tempList);
 
       });
   }, []);
   return (
-    <div className="App">
-      <h1>Music Player</h1>
+    <div className="ucg_music">
       {(data? 
+      <>
+      <Playlist type="page" data={data} currentItem={currentItem} setCurrentMedia={setCurrentMedia} />
       <Player list={data} setCurrentMedia={setCurrentMedia} currentItem={currentItem} />
+      </>
       : "loading...")}
       <hr />
       

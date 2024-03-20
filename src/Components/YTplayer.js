@@ -1,23 +1,58 @@
 import { useEffect, useState } from 'react';
 import YouTube from 'react-youtube';
 
-const onReady = (event) => {
-    console.log("ready", event)
+
+
+window['ytTimer'] = null; 
+
+function YTplayer(props) {
+
+  const updatePercentage = props.updatePercentage;
+  const [duration, setDuration] = useState(0);
+  const videoRef = props.videoRef;
+
+  const onReady = (event) => {
+
     // access to player in all event handlers via event.target
     window['cElement'] = event;
     event.target.pauseVideo();
-}
+    videoRef.current = event.target;
+  }
 
+  const checkVideoTime = (event) => {
+    if(window['cElement'] && window['cElement'].target &&  window['cElement'].target.h!=null){
 
-function YTplayer(props) {
+        let currentTime = window['cElement'].target.getCurrentTime();
+        //get percentage
+        const percentage = (currentTime / window['cElement'].target.getDuration()) * 100;
+
+        updatePercentage(percentage);
+    
+    }
+  }
 
 
   useEffect(() => {
     if (window['cElement'] && window['cElement'].target &&  window['cElement'].target.h!=null) {
-      console.log(window['cElement'].target)
+
       props.isPaused
         ? window['cElement'].target.pauseVideo()
         : window['cElement'].target.playVideo();
+       
+      const timer = window['cElement'].target.getCurrentTime();
+      const totalLength = window['cElement'].target.getDuration();
+      videoRef.current = window['cElement'].target;
+      
+     
+      setDuration(totalLength);
+      if(props.isPaused){
+
+        window.clearInterval(window['ytTimer']);
+      } else {
+        window['ytTimer'] = window.setInterval(checkVideoTime, 1000);
+      }
+      
+      
     } else {
       console.log("no cElement")
     }
@@ -59,12 +94,14 @@ function YTplayer(props) {
 />
 */
     
-      return <YouTube 
+      return <div><YouTube 
         videoId={YTid} 
         opts={opts} 
         onEnd={onEnded}
+        onTimeUpdate={checkVideoTime}
         onReady={onReady} 
-      />;
+        onStateChange={checkVideoTime}
+      /></div>;
     
 
 }
