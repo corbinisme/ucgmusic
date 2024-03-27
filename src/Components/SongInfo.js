@@ -7,7 +7,7 @@ function SongInfo(props){
         <div className="song_meta col">
             <h3>Info</h3>
             <div className="bottom_scroll">
-                <p>composer</p>
+                
                 
                 <div dangerouslySetInnerHTML={{__html: lyrics}}></div>
             </div>

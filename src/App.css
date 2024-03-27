@@ -1,9 +1,11 @@
+:root {
+  --modalBg:rgba(255,255,255, 0.5);
+}
+[data-bs-theme="dark"] {
+  --modalBg:rgba(0,0,0, 0.5);
+}
 .ucg_music {
   padding-top: 1em;
-}
-.player_modal {
-  display: none;
-
 }
 .ucg_music .page_playlist ul {
   list-style: none;
@@ -21,45 +23,47 @@
   display: block;
 
 }
-
-.player_modal.open {
+.ucg_music .player_modal {
+  display: none;
+}
+.ucg_music .player_modal.open {
   position: fixed;
   top: 0em;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.5);
-  z-index: 100;
+  z-index: 989;
   overflow: auto;
   display: block;
 }
-.active {
+.ucg_music .active {
   font-weight: bold;
 }
-.title {
+.ucg_music .title {
   cursor: pointer;
 }
-.mediaWrapper {
+.ucg_music .mediaWrapper {
 
   padding: 1em;
   border-radius: 1em;
   position: relative;
 }
-.progress {
-  height: 15px;
-  background: #eee;
+.ucg_music .progress {
+  min-height: 15px;
+  background-color: var(--bg-light);
 }
-.progress-bar {
+.ucg_music .progress-bar {
   height: 15px;
 }
 
-.sr-only {
+.ucg_music .sr-only {
   display: block;
   position: absolute;
   top:-999em;
   visibility: hidden;
 }
-.controls_wrapper .btn {
+.ucg_music .controls_wrapper .btn {
   border-radius: 50%;
   height: 64px;
   width: 64px;
@@ -67,81 +71,85 @@
   text-align: center;
 
 }
-.close_modal {
+.ucg_music .close_modal {
   position: absolute;
   top: 1em;
   right: 1em;
   cursor: pointer;
   width: 40px;
   height: 40px;
-  padding: 0;
+  padding: 0!important;
   text-align: center;
   line-height: 40px;
   z-index: 89;
 
 }
-.btn svg {
+.ucg_music .btn svg {
   width: 35px;
   max-height: 35px;
 }
-.btn.small_icon svg {
+.ucg_music .btn.small_icon svg {
   width: 15x;
   max-height: 15px;
 
 }
-.reverse_icon svg {
+.ucg_music .reverse_icon svg {
   transform: rotate(180deg);
 }
-.btn.small_icon {
+.ucg_music .btn.small_icon {
   padding: 5px;
   width: 44px;
   height: 44px;
 }
 
-.media_meta .song_meta {
+.ucg_music .media_meta .song_meta {
 
   max-height: 30px;
   overflow: auto;
 }
+.ucg_music .song_meta a, .ucg_music .controls_wrapper a {
+  color: var(--body-text);
+  font-weight: bold;
+}
 
-.player_wrapper {
+.ucg_music .player_wrapper {
   height: 350px;
 }
-.album_art img {
+.ucg_music .album_art img {
   box-shadow: 0 0 3px #333;
 }
-.inner_wrapper .inner_modal {
+.ucg_music .inner_wrapper .inner_modal {
   margin: auto;
   width: 90%;
   max-width: 700px;
   border-radius: 1em;
-  box-shadow: 0 0 3px #333;
+  box-shadow: 0 0 26px -8px #333;
   padding: 1em;
-  background-color: rgba(255,255,255,0.6);
+  background-color:var(--modalBg);
   backdrop-filter: blur(5px);
   /*height: calc(100vh - 3em);*/
-  margin-top: 1.5em;
+  margin-top: 4.5em;
 }
 
-.controls_wrapper {
+.ucg_music .controls_wrapper {
   justify-content: center;
   margin-bottom: 1em;
   align-items: center;
 }
 
-.ucg_music iframe {
+.ucg_music .ucg_music iframe {
   width: 100%;
   height: 300px;
 }
-.bottom_scroll {
+.ucg_music .bottom_scroll {
   height: 100px;
   overflow: auto;
 }
-.bottom_scroll h3 {
+.ucg_music .bottom_scroll h3 {
   font-size: 1em;
   margin: 0;
   margin-bottom: .5em;
 }
-.bottom_scroll li span {
+.ucg_music .bottom_scroll li span {
   display: none;
 }

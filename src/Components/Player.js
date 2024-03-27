@@ -12,6 +12,8 @@ function Player(props){
     const setCurrentMedia = props.setCurrentMedia;
     const [isPaused, setIsPaused] = useState(false);
     const [currentPercentage, setCurrentPercentage] = useState(59);
+    const [showInfo, setShowInfo] = useState(true);
+    const [showPlaylist, setShowPlaylist] = useState(false);
 
     const audioRef = useRef();
     const videoRef = useRef();
@@ -30,6 +32,11 @@ function Player(props){
             setCurrentMedia(data[nextIndex].id);
         }
         
+    }
+
+    const toggleInfo = () => {
+
+        setShowInfo(!showInfo);
     }
 
     const updatePercentage = (percentage) => {
@@ -98,13 +105,13 @@ function Player(props){
                 </div>
                
             
-            <Controls goToNextSong={goToNextSong} currentPercentage={currentPercentage} updatePercentage={updatePercentage} togglePause={togglePause} isPaused={isPaused} />
+            <Controls toggleInfo={toggleInfo} showInfo={showInfo} goToNextSong={goToNextSong} currentPercentage={currentPercentage} updatePercentage={updatePercentage} togglePause={togglePause} isPaused={isPaused} />
             
             <div className="bottom row mt-4">
 
                 
-                <SongInfo currrentMediaObj={currrentMediaObj} />
-                <Playlist type="modal" data={data} currentItem={currentItem} setCurrentMedia={setCurrentMedia} />
+                {showInfo&&<SongInfo currrentMediaObj={currrentMediaObj} />}
+                {showPlaylist&&<Playlist type="modal" data={data} currentItem={currentItem} setCurrentMedia={setCurrentMedia} />}
                
             </div>
             </div>
