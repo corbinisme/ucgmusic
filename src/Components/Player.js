@@ -7,13 +7,14 @@ import React, { useState, useRef, useEffect } from "react";
 
 function Player(props){
     const data = props.list;
+    const includes = props.includes;
     const currentItem = props.currentItem;
     const currrentMediaObj = data.filter(item=> item.id == currentItem);
     const setCurrentMedia = props.setCurrentMedia;
     const [isPaused, setIsPaused] = useState(false);
     const [currentPercentage, setCurrentPercentage] = useState(59);
     const [showInfo, setShowInfo] = useState(true);
-    const [showPlaylist, setShowPlaylist] = useState(false);
+    const [showPlaylist, setShowPlaylist] = useState(true);
 
     const audioRef = useRef();
     const videoRef = useRef();
@@ -111,7 +112,7 @@ function Player(props){
 
                 
                 {showInfo&&<SongInfo currrentMediaObj={currrentMediaObj} />}
-                {showPlaylist&&<Playlist type="modal" data={data} currentItem={currentItem} setCurrentMedia={setCurrentMedia} />}
+                {showPlaylist&&<Playlist type="modal" data={data} currentItem={currentItem} setCurrentMedia={setCurrentMedia} includes={includes} />}
                
             </div>
             </div>

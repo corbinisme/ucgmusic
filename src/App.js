@@ -4,6 +4,7 @@ import Player from "./Components/Player";
 import Playlist from "./Components/Playlist";
 import "./App.css";
 import Productions from "./Components/Productions";
+import Categories from "./Components/Categories";
 
 
 function App() {
@@ -23,6 +24,10 @@ function App() {
   const setCurrentCategoryValue = (category) => {
     setCurrentCategory(category);
   }
+
+  const justPlay = () => {
+    setCurrentItem(data[0].id);
+  }
  
   useEffect(() => {
     fetch(url)
@@ -35,17 +40,23 @@ function App() {
 
         rows.forEach(element => {
           
-          if(element.attributes.field_is_public_ == false || true){
+          // only show non-public items
+          if(element.attributes.field_is_public_ == false){
             let temp = {};
             let categoriesArr = element.relationships.field_category.data?element.relationships.field_category.data: null;
             let categoryIds = [];
-            console.log("categoriesArr", categoriesArr)
-            
+
+            let correctCategory = currentCategory==""? true: false;
+           
             if(categoriesArr.length>0){
               categoriesArr.forEach(function(item){
                 categoryIds.push(item.id);
+                if(item.id==currentCategory){
+                  correctCategory = true;
+                }
               });
             }
+
 
             temp["category"] = categoryIds.join(",");
             temp["music_link"] = element.attributes.field_music_link;
@@ -57,7 +68,10 @@ function App() {
             temp["lyrics"] = (element.attributes.body? element.attributes.body.value: null);
             
             temp['id'] = element.id;
-            tempList.push(temp);
+
+            if(correctCategory){
+              tempList.push(temp);
+            }
             
           }
 
@@ -65,14 +79,16 @@ function App() {
       setData(tempList);
 
       });
-  }, []);
+  }, [currentCategory]);
   return (
     <div className="ucg_music">
-      <button>Play All</button>
+      <button className='btn btn-secondary' onClick={()=>justPlay()}>Play All</button>
+      <hr />
       {(data? 
       <>
-      <Playlist type="page" data={data} includes={includes} currentItem={currentItem} setCurrentMedia={setCurrentMedia} />
-      <Player list={data} setCurrentMedia={setCurrentMedia} currentItem={currentItem} />
+      <Categories data={data} includes={includes} setCurrentCategory={setCurrentCategoryValue} currentCategory={currentCategory} />
+      {false && <Playlist type="page" data={data} includes={includes} currentItem={currentItem} setCurrentMedia={setCurrentMedia} />}
+      <Player list={data} setCurrentMedia={setCurrentMedia} currentItem={currentItem} includes={includes}  />
       </>
       : "loading...")}
       <hr />

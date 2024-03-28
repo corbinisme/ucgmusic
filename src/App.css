@@ -101,7 +101,24 @@
   width: 44px;
   height: 44px;
 }
+.ucg_music .badge.active {
+  background-color: #095890 !important;
+}
+.ucg_music .item_ul {
+  list-style-type: none;
+  margin: 0;
+  padding:0;
+  display: block;
+}
+.ucg_music .item_ul li {
+  margin: 0;
+  padding: 0;
+  display: block;
+  border-bottom: 1px dotted #555;
+  margin-bottom: .5em;
+  padding-bottom: .5em;
 
+}
 .ucg_music .media_meta .song_meta {
 
   max-height: 30px;
@@ -137,7 +154,7 @@
   align-items: center;
 }
 
-.ucg_music .ucg_music iframe {
+.ucg_music  iframe {
   width: 100%;
   height: 300px;
 }
@@ -151,5 +168,5 @@
   margin-bottom: .5em;
 }
 .ucg_music .bottom_scroll li span {
-  display: none;
+  display: inline-block;
 }
